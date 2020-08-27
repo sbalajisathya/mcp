@@ -1,0 +1,63 @@
+crypto:
+ secretKey: '{cipher}e24d16408894d4a92d8b389a58290825dc1744073b6fa0438e053d9f8ca40b28'
+ transformation: '{cipher}e6957b10e486b0087725bf3f69fde53e8d7580f84c0586000d3f924e4790d170d305cd12fdb55622ca18a3ba3b0ac5f8' 
+ msgDigest: '{cipher}46085b4524eccc423edf6b927a946096010e39cfd8158c32463baec2b1b806ea'
+ algorithm: '{cipher}18808b86fee35734d83e32d2e87c336abecce407af61eb551d03982550351690'
+
+eureka:
+    client:
+        fetchRegistry: true
+        registerWithEureka: true
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka
+    server:
+        waitTimeInMsWhenSyncEmpty: 0
+logging:
+    level:
+        org:
+            springframework:
+                mail: DEBUG
+    pattern:
+        console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+management:
+    endpoint:
+        metrics:
+            enabled: true
+        prometheus:
+            enabled: true
+    endpoints:
+        web:
+            expose: '*'
+            exposure:
+                include: '*'
+    metrics:
+        export:
+            prometheus:
+                enabled: true
+
+server:
+    port: ${PORT:8091}
+    servlet:
+        context-path: /api
+spring:
+    zipkin:
+        base-url: http://localhost:9411/ 
+    datasource:
+        driverClassName: org.h2.Driver
+        password: 
+        url: jdbc:h2:file:E:/B-Work/Micro WS1/data/app_db1;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+        #url: jdbc:h2:mem:testdb
+        username: sa
+    h2:
+        console:
+            enabled: true
+            path: /h2
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                format_sql: true
+                generate_statistics: false
+        show-sql: true

@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "addresses": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "addressType": {
+              "type": "string",        
+            "enum": [
+              "HOME",
+              "OFFICE"
+            ]
+            },
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "doorNo": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "streetName": {
+              "type": "string"
+            },
+            "zipCode": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "addressType",
+            "city",
+            "country",
+            "doorNo",
+            "state",
+            "streetName",
+            "zipCode"
+          ]
+        }
+      ]
+    },
+    "contactDetail": {
+      "type": "object",
+      "properties": {
+        "emailId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "mobileNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "emailId",
+        "firstName",
+        "fullName",
+        "lastName",
+        "mobileNumber"
+      ]
+    },
+   
+    "personalDetail": {
+      "type": "object",
+      "properties": {
+        "citizenship": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "fatherName": {
+          "type": "string"
+        },
+        "maritalStatus": {
+          "type":  "string",        
+            "enum": [
+              "SINGLE",
+              "MARRIED"
+            ]
+        },
+        "pancard": {
+          "type": "string"
+        },
+        "residentialStatus": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "citizenship",
+        "dateOfBirth",
+        "fatherName",
+        "maritalStatus",
+        "pancard",
+        "residentialStatus"
+      ]
+    },
+    "professionalDetail": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": "string"
+        },
+        "designationName": {
+          "type": "string"
+        },
+        "grossAnnualIncome": {
+          "type": "number"
+        },
+        "professionName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "companyName",
+        "designationName",
+        "grossAnnualIncome",
+        "professionName"
+      ]
+    }
+  },
+  "required": [
+    "addresses",
+    "contactDetail",
+    "personalDetail",
+    "professionalDetail"
+   
+  ]
+}

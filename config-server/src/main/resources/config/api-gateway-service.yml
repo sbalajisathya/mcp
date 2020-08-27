@@ -1,0 +1,67 @@
+server:
+  port: ${PORT:8095}
+  
+
+  
+spring:
+  zipkin:
+        base-url: http://localhost:9411/ 
+  cloud:
+   gateway:
+       #enabled: true
+       #discovery:
+       # locator:
+       #   enabled: true
+    routes:
+      - id: creditCardApplyModule
+        uri: lb://CREDIT-CARD-APPLY-SERVICE
+        predicates:
+        - Path=/api/ccapply/**
+      - id: creditCardProcessModule
+        uri: lb://CREDIT-CARD-MGMT-SERVICE
+        predicates:
+        - Path=/api/ccmgmt/**
+  
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 900000
+
+
+
+management:
+    endpoint:
+        metrics:
+            enabled: true
+        prometheus:
+            enabled: true
+    endpoints:
+        web:
+            expose: '*'
+            exposure:
+                include: '*'
+    metrics:
+        export:
+            prometheus:
+                enabled: true
+
+            
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
+eureka:
+  client:
+    serviceUrl:
+       defaultZone: http://localhost:8761/eureka
+    registerWithEureka: true
+    fetchRegistry: true
+  server:
+    waitTimeInMsWhenSyncEmpty: 0      
+      
+      

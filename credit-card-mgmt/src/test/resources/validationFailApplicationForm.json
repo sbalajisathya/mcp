@@ -1,0 +1,46 @@
+{
+    "id": 33,
+    "customerDetail": {
+        "id": 33,
+        "contactDetail": {
+            "id": 33,
+            "firstName": "Ram",
+            "lastName": "Sathyanarayanan",
+            "fullName": "Ram Sathyanarayanan",
+            "mobileNumber": "sdfsdf==",
+            "emailId": "fsdfsdf/HfaksyLFWOzE0pcoOw="
+        },
+        "personalDetail": {
+            "id": 33,
+            "fatherName": "Sathyanarayanan",
+            "dateOfBirth": "12-03-1988",
+            "maritalStatus": "SINGLE",
+            "citizenship": "Indian",
+            "residentialStatus": "Chennai",
+            "pancard": "sdfsdf+W3lSuy7oWqA=="
+        },
+        "professionalDetail": {
+            "id": 33,
+            "professionName": "Software Developer",
+            "companyName": "QBC Corp",
+            "designationName": "Senior Associcate",
+            "grossAnnualIncome": 50000
+        },
+        "addresses": [{
+                "id": 33,
+                "doorNo": "41",
+                "streetName": "Kumara St",
+                "city": "Chennai",
+                "state": "Tamil Nadu",
+                "country": "India",
+                "zipCode": "600098",
+                "addressType": "HOME"
+            }
+        ],
+        "createDateTime": 1597773046473,
+        "updateDateTime": null
+    },
+    "creditCardNumber": null,
+    "applicationStatus": "PENDING",
+    "applicationNumber": "sdfsdf-aaa0-4f96-8e1f-db19cc6ff4f9"
+}

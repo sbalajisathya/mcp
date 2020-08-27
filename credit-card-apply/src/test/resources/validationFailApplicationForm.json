@@ -1,0 +1,32 @@
+{
+    "contactDetail": {
+        "firstName": "Ram",
+        "lastName": "Sathyanarayanan",
+        "mobileNumber": "987-654-321",
+        "emailId": "test@gmail.com"
+    },
+    "personalDetail": {
+        "fatherName": "Sathyanarayanan",
+        "dateOfBirth": "12-03-1988",
+        "maritalStatus": "SINGLE",
+        "citizenship": "Indian",
+        "residentialStatus": "Chennai",
+        "pancard": "ERWFSDFSF"
+    },
+    "professionalDetail": {
+        "professionName": "Software Developer",
+        "companyName": "QBC Corp",
+        "designationName": "Senior Associcate",
+        "grossAnnualIncome": 600000
+    },
+    "addresses": [{
+            "doorNo": "41",
+            "streetName": "Kumara St",
+            "city": "Chennai",
+            "state": "Tamil Nadu",
+            "country": "India",
+            "zipCode": "600098",
+            "addressType": "HOME"
+        }
+    ]
+}
