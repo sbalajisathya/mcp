@@ -55,7 +55,7 @@ public class CreditCardApplyServiceImpl implements CreditCardApplyService {
 	 * @return the response entity
 	 */
 	public ResponseEntity<Object> addCreditCardApplciationInfo(CustomerDetail customerDto) {
-		log.debug("Method started!!");
+		log.debug("Service - AddCreditCardApplciationInfo -Method started!!");
 		ResponseMessage respMsg = new ResponseMessage();
 
 		ProcessingReport validationReport = schemaValidator.validateApplicationForm(customerDto);

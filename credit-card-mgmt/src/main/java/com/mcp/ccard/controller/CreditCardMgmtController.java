@@ -5,6 +5,8 @@
 package com.mcp.ccard.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,8 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("ccmgmt")
 public class CreditCardMgmtController {
+	
+	private static final Logger log = LoggerFactory.getLogger(CreditCardMgmtController.class);
 
 	/** The credit card mgmt service. */
 	@Autowired
@@ -43,6 +47,7 @@ public class CreditCardMgmtController {
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping("/findCreditCardApplicationByApplnNo")
 	public ResponseEntity<Object> searchCreditCardApplicationInformation(@RequestParam String applicationNumber) throws Exception {
+		log.debug("Controller - SearchCreditCardApplicationInformation -Method started!!");
 		return creditCardMgmtService.findCreditCardApplicationInfo(applicationNumber);
 	}
 
@@ -58,6 +63,7 @@ public class CreditCardMgmtController {
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping("/findCreditCardApplicationsByStatus")
 	public ResponseEntity<Object> findAllCreditCardApplications(@RequestParam String status) {
+		log.debug("Controller - findAllCreditCardApplications -Method started!!");
 		return creditCardMgmtService.findAllCreditCardApplicationByStatus(status);
 	}
 
@@ -75,6 +81,7 @@ public class CreditCardMgmtController {
 	@GetMapping("/validateCreditCardApplication")
 	public ResponseEntity<Object> validateCreditCardApplication(@RequestParam String applicationNumber)
 			throws Exception {
+		log.debug("Controller - validateCreditCardApplication -Method started!!");
 		return creditCardMgmtService.validateCreditCardApplication(applicationNumber);
 	}
 
@@ -92,6 +99,7 @@ public class CreditCardMgmtController {
 	@PostMapping("/processCreditCardApplication")
 	public ResponseEntity<Object> processCreditCardApplication(@RequestParam String applicationNumber)
 			throws Exception {
+		log.debug("Controller - processCreditCardApplication -Method started!!");
 		return creditCardMgmtService.processCreditCardApplication(applicationNumber);
 	}
 

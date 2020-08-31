@@ -5,6 +5,8 @@
 package com.mcp.ccard.service;
 
 import java.util.HashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -31,6 +33,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
  */
 @Component
 public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
+	
+	private static final Logger log = LoggerFactory.getLogger(CreditCardMgmtServiceImpl.class);
 
 	/** The application repository. */
 	@Autowired
@@ -81,6 +85,7 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 	 */
 	@HystrixCommand(fallbackMethod = "fallBackFindCreditAppln")
 	public ResponseEntity<Object> findCreditCardApplicationInfo(String applicationNumber) throws Exception {
+		log.debug("Service - findCreditCardApplicationInfo -Method started!!");
 		CustomerApplicationEntity applicationEntity = applicationRepository.findByApplicationNumber(applicationNumber);
 		if (applicationEntity == null) {
 			throw new Exception("APPLICATION NOT FOUND");
@@ -98,6 +103,7 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 	 * @return the response entity
 	 */
 	public ResponseEntity<Object> findAllCreditCardApplicationByStatus(String status) {
+		log.debug("Service - findAllCreditCardApplicationByStatus -Method started!!");
 		List<CustomerApplicationEntity> applications = applicationRepository.findByApplicationStatus(status);
 		if (applications == null) {
 			ResponseMessage respMsg = new ResponseMessage();
@@ -121,6 +127,7 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 	 * @throws Exception the exception
 	 */
 	public ResponseEntity<Object> processCreditCardApplication(String applicationNumber) throws Exception {
+		log.debug("Service - processCreditCardApplication -Method started!!");
 		String creditCardNumber = UUID.randomUUID().toString();
 		CustomerApplicationEntity application = applicationRepository.findByApplicationNumber(applicationNumber);
 		
@@ -133,14 +140,17 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 			ResponseMessage respMsg = new ResponseMessage();
 			respMsg.setCode(API_104);
 			respMsg.setMessage("Application Already Processed");
+			log.debug("Application Already Processed");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respMsg);
 		} else if (!validationCheck(application)) {
 			ResponseMessage respMsg = new ResponseMessage();
 			respMsg.setCode(API_107);
 			respMsg.setMessage("Credit Card Application Process Failed Due to Validation Failed!! ");
+			log.debug("Credit Card Application Process Failed Due to Validation Failed!! ");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respMsg);
 		}
 		application.setApplicationStatus("APPROVED");
+		log.debug("APPROVED");
 		application.setCreditCardNumber(cryptoUtil.encrypt(creditCardNumber));
 		applicationRepository.save(application);
 
@@ -154,6 +164,7 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 		ResponseMessage respMsg = new ResponseMessage();
 		respMsg.setCode(API_102);
 		respMsg.setMessage("Application Approved successfully.");
+		log.debug("Application Approved successfully.");
 		return ResponseEntity.status(HttpStatus.OK).body(respMsg);
 	}
 
@@ -165,6 +176,7 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 	 * @throws Exception the exception
 	 */
 	public ResponseEntity<Object> validateCreditCardApplication(String applicationNumber) throws Exception {
+		log.debug("Service - validateCreditCardApplication -Method started!!");
 		CustomerApplicationEntity applicationEntity = applicationRepository.findByApplicationNumber(applicationNumber);
 		
 		if (applicationEntity == null) {
@@ -183,12 +195,14 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 			ResponseMessage respMsg = new ResponseMessage();
 			respMsg.setCode(API_105);
 			respMsg.setMessage("Validation Failed. Sent Acknowledgement Status to Customer");
+			log.debug("Validation Failed. Sent Acknowledgement Status to Customer");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respMsg);
 		}
 
 		ResponseMessage respMsg = new ResponseMessage();
 		respMsg.setCode(API_106);
 		respMsg.setMessage("Valiadtion Success!!");
+		log.debug("Valiadtion Success!!");
 		return ResponseEntity.status(HttpStatus.OK).body(respMsg);
 	}
 
@@ -199,6 +213,7 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 	 * @return true, if successful
 	 */
 	public boolean validationCheck(CustomerApplicationEntity applicationEntity) {
+		log.debug("Service - validationCheck -Method started!!");
 		boolean validationStatus = false;
 		if (applicationEntity.getCustomerDetail().getProfessionalDetail().getGrossAnnualIncome() >= 500000) {
 			return true;
@@ -214,6 +229,7 @@ public class CreditCardMgmtServiceImpl implements CreditCardMgmtService {
 	 * @return the response entity
 	 */
 	public ResponseEntity<Object> fallBackFindCreditAppln(String applicationNumber) {
+		log.debug("Service - fallBackFindCreditAppln -Method started!!");
 		ResponseMessage respMsg = new ResponseMessage();
 		respMsg.setCode(API_103);
 		respMsg.setMessage(APPLICATION_NOT_FOUND);
