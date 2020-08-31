@@ -49,7 +49,7 @@ public class CreditCardApplyController {
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	public ResponseEntity<Object> addCreditCardApplicationRequest(@RequestBody CustomerDetail customerDto)
 			throws Exception {
-		log.debug("Method started!!");
+		log.debug("AddCreditCardApplicationRequest - Method started!!");
 		return creditCardApplyService.addCreditCardApplciationInfo(customerDto);
 	}
 
